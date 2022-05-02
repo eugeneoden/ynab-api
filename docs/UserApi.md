@@ -4,7 +4,7 @@ All URIs are relative to *https://api.youneedabudget.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_user**](UserApi.md#get_user) | **get** /user | User info
+[**get_user**](UserApi.md#get_user) | **GET** /user | User info
 
 
 

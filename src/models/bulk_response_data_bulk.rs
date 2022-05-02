@@ -11,12 +11,12 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct BulkResponseDataBulk {
     /// The list of Transaction ids that were created.
     #[serde(rename = "transaction_ids")]
     pub transaction_ids: Vec<String>,
-    /// If any Transactions were not created because they had an import_id matching a transaction already on the same account, the specified import_id(s) will be included in this list.
+    /// If any Transactions were not created because they had an `import_id` matching a transaction already on the same account, the specified import_id(s) will be included in this list.
     #[serde(rename = "duplicate_import_ids")]
     pub duplicate_import_ids: Vec<String>,
 }

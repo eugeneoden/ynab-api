@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct Category {
     #[serde(rename = "id")]
     pub id: String,
@@ -36,7 +36,7 @@ pub struct Category {
     /// Balance in milliunits format
     #[serde(rename = "balance")]
     pub balance: i64,
-    /// The type of goal, if the category has a goal (TB=Target Category Balance, TBD=Target Category Balance by Date, MF=Monthly Funding)
+    /// The type of goal, if the category has a goal (TB='Target Category Balance', TBD='Target Category Balance by Date', MF='Monthly Funding', NEED='Plan Your Spending')
     #[serde(rename = "goal_type", skip_serializing_if = "Option::is_none")]
     pub goal_type: Option<GoalType>,
     /// The month a goal was created
@@ -45,12 +45,24 @@ pub struct Category {
     /// The goal target amount in milliunits
     #[serde(rename = "goal_target", skip_serializing_if = "Option::is_none")]
     pub goal_target: Option<i64>,
-    /// If the goal type is 'TBD' (Target Category Balance by Date), this is the target month for the goal to be completed
+    /// The original target month for the goal to be completed.  Only some goal types specify this date.
     #[serde(rename = "goal_target_month", skip_serializing_if = "Option::is_none")]
     pub goal_target_month: Option<String>,
     /// The percentage completion of the goal
     #[serde(rename = "goal_percentage_complete", skip_serializing_if = "Option::is_none")]
     pub goal_percentage_complete: Option<i32>,
+    /// The number of months, including the current month, left in the current goal period.
+    #[serde(rename = "goal_months_to_budget", skip_serializing_if = "Option::is_none")]
+    pub goal_months_to_budget: Option<i32>,
+    /// The amount of funding still needed in the current month to stay on track towards completing the goal within the current goal period.  This amount will generally correspond to the 'Underfunded' amount in the web and mobile clients except when viewing a category with a Needed for Spending Goal in a future month.  The web and mobile clients will ignore any funding from a prior goal period when viewing category with a Needed for Spending Goal in a future month.
+    #[serde(rename = "goal_under_funded", skip_serializing_if = "Option::is_none")]
+    pub goal_under_funded: Option<i64>,
+    /// The total amount funded towards the goal within the current goal period.
+    #[serde(rename = "goal_overall_funded", skip_serializing_if = "Option::is_none")]
+    pub goal_overall_funded: Option<i64>,
+    /// The amount of funding still needed to complete the goal within the current goal period.
+    #[serde(rename = "goal_overall_left", skip_serializing_if = "Option::is_none")]
+    pub goal_overall_left: Option<i64>,
     /// Whether or not the category has been deleted.  Deleted categories will only be included in delta requests.
     #[serde(rename = "deleted")]
     pub deleted: bool,
@@ -73,13 +85,17 @@ impl Category {
             goal_target: None,
             goal_target_month: None,
             goal_percentage_complete: None,
+            goal_months_to_budget: None,
+            goal_under_funded: None,
+            goal_overall_funded: None,
+            goal_overall_left: None,
             deleted,
         }
     }
 }
 
-/// The type of goal, if the category has a goal (TB=Target Category Balance, TBD=Target Category Balance by Date, MF=Monthly Funding)
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+/// The type of goal, if the category has a goal (TB='Target Category Balance', TBD='Target Category Balance by Date', MF='Monthly Funding', NEED='Plan Your Spending')
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum GoalType {
     #[serde(rename = "TB")]
     TB,
@@ -89,5 +105,11 @@ pub enum GoalType {
     MF,
     #[serde(rename = "NEED")]
     NEED,
+}
+
+impl Default for GoalType {
+    fn default() -> GoalType {
+        Self::TB
+    }
 }
 

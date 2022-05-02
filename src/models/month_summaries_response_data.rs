@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct MonthSummariesResponseData {
     #[serde(rename = "months")]
     pub months: Vec<crate::models::MonthSummary>,

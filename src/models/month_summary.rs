@@ -11,22 +11,22 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct MonthSummary {
     #[serde(rename = "month")]
     pub month: String,
     #[serde(rename = "note", skip_serializing_if = "Option::is_none")]
     pub note: Option<String>,
-    /// The total amount in transactions categorized to 'Inflow: To be Budgeted' in the month
+    /// The total amount of transactions categorized to 'Inflow: Ready to Assign' in the month
     #[serde(rename = "income")]
     pub income: i64,
     /// The total amount budgeted in the month
     #[serde(rename = "budgeted")]
     pub budgeted: i64,
-    /// The total amount in transactions in the month, excluding those categorized to 'Inflow: To be Budgeted'
+    /// The total amount of transactions in the month, excluding those categorized to 'Inflow: Ready to Assign'
     #[serde(rename = "activity")]
     pub activity: i64,
-    /// The available amount for 'To be Budgeted'
+    /// The available amount for 'Ready to Assign'
     #[serde(rename = "to_be_budgeted")]
     pub to_be_budgeted: i64,
     /// The Age of Money as of the month

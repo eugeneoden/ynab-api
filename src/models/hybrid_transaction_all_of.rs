@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct HybridTransactionAllOf {
     /// Whether the hybrid transaction represents a regular transaction or a subtransaction
     #[serde(rename = "type")]
@@ -40,11 +40,17 @@ impl HybridTransactionAllOf {
 }
 
 /// Whether the hybrid transaction represents a regular transaction or a subtransaction
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Type {
     #[serde(rename = "transaction")]
     Transaction,
     #[serde(rename = "subtransaction")]
     Subtransaction,
+}
+
+impl Default for Type {
+    fn default() -> Type {
+        Self::Transaction
+    }
 }
 

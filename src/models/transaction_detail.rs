@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TransactionDetail {
     #[serde(rename = "id")]
     pub id: String,
@@ -91,7 +91,7 @@ impl TransactionDetail {
 }
 
 /// The cleared status of the transaction
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Cleared {
     #[serde(rename = "cleared")]
     Cleared,
@@ -100,8 +100,14 @@ pub enum Cleared {
     #[serde(rename = "reconciled")]
     Reconciled,
 }
+
+impl Default for Cleared {
+    fn default() -> Cleared {
+        Self::Cleared
+    }
+}
 /// The transaction flag
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum FlagColor {
     #[serde(rename = "red")]
     Red,
@@ -115,5 +121,11 @@ pub enum FlagColor {
     Blue,
     #[serde(rename = "purple")]
     Purple,
+}
+
+impl Default for FlagColor {
+    fn default() -> FlagColor {
+        Self::Red
+    }
 }
 

@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct UpdateTransactionsWrapper {
     #[serde(rename = "transactions")]
     pub transactions: Vec<crate::models::UpdateTransaction>,

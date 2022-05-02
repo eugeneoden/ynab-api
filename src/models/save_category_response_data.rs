@@ -11,10 +11,10 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SaveCategoryResponseData {
     #[serde(rename = "category")]
-    pub category: crate::models::Category,
+    pub category: Box<crate::models::Category>,
     /// The knowledge of the server
     #[serde(rename = "server_knowledge")]
     pub server_knowledge: i64,
@@ -23,7 +23,7 @@ pub struct SaveCategoryResponseData {
 impl SaveCategoryResponseData {
     pub fn new(category: crate::models::Category, server_knowledge: i64) -> SaveCategoryResponseData {
         SaveCategoryResponseData {
-            category,
+            category: Box::new(category),
             server_knowledge,
         }
     }

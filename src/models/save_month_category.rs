@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SaveMonthCategory {
     /// Budgeted amount in milliunits format
     #[serde(rename = "budgeted")]

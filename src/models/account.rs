@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct Account {
     #[serde(rename = "id")]
     pub id: String,
@@ -40,6 +40,12 @@ pub struct Account {
     /// The payee id which should be used when transferring to this account
     #[serde(rename = "transfer_payee_id")]
     pub transfer_payee_id: String,
+    /// Whether or not the account is linked to a financial institution for automatic transaction import.
+    #[serde(rename = "direct_import_linked", skip_serializing_if = "Option::is_none")]
+    pub direct_import_linked: Option<bool>,
+    /// If an account linked to a financial institution (direct_import_linked=true) and the linked connection is not in a healthy state, this will be true.
+    #[serde(rename = "direct_import_in_error", skip_serializing_if = "Option::is_none")]
+    pub direct_import_in_error: Option<bool>,
     /// Whether or not the account has been deleted.  Deleted accounts will only be included in delta requests.
     #[serde(rename = "deleted")]
     pub deleted: bool,
@@ -58,13 +64,15 @@ impl Account {
             cleared_balance,
             uncleared_balance,
             transfer_payee_id,
+            direct_import_linked: None,
+            direct_import_in_error: None,
             deleted,
         }
     }
 }
 
 /// The type of account. Note: payPal, merchantAccount, investmentAccount, and mortgage types have been deprecated and will be removed in the future.
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Type {
     #[serde(rename = "checking")]
     Checking,
@@ -88,5 +96,11 @@ pub enum Type {
     InvestmentAccount,
     #[serde(rename = "mortgage")]
     Mortgage,
+}
+
+impl Default for Type {
+    fn default() -> Type {
+        Self::Checking
+    }
 }
 

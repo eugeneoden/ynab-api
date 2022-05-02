@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct CategoriesResponseData {
     #[serde(rename = "category_groups")]
     pub category_groups: Vec<crate::models::CategoryGroupWithCategories>,

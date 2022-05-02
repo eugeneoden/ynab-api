@@ -4,7 +4,7 @@ All URIs are relative to *https://api.youneedabudget.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**bulk_create_transactions**](DeprecatedApi.md#bulk_create_transactions) | **post** /budgets/{budget_id}/transactions/bulk | Bulk create transactions
+[**bulk_create_transactions**](DeprecatedApi.md#bulk_create_transactions) | **POST** /budgets/{budget_id}/transactions/bulk | Bulk create transactions
 
 
 
@@ -20,7 +20,7 @@ Creates multiple transactions.  Although this endpoint is still supported, it is
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**budget_id** | **String** | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget) | [required] |
+**budget_id** | **String** | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | [required] |
 **transactions** | [**BulkTransactions**](BulkTransactions.md) | The list of transactions to create | [required] |
 
 ### Return type

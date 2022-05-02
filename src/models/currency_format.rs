@@ -12,7 +12,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct CurrencyFormat {
     #[serde(rename = "iso_code")]
     pub iso_code: String,

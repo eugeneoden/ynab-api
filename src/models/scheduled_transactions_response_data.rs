@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ScheduledTransactionsResponseData {
     #[serde(rename = "scheduled_transactions")]
     pub scheduled_transactions: Vec<crate::models::ScheduledTransactionDetail>,

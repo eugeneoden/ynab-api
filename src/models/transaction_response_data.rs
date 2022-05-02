@@ -11,16 +11,16 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TransactionResponseData {
     #[serde(rename = "transaction")]
-    pub transaction: crate::models::TransactionDetail,
+    pub transaction: Box<crate::models::TransactionDetail>,
 }
 
 impl TransactionResponseData {
     pub fn new(transaction: crate::models::TransactionDetail) -> TransactionResponseData {
         TransactionResponseData {
-            transaction,
+            transaction: Box::new(transaction),
         }
     }
 }

@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SubTransaction {
     #[serde(rename = "id")]
     pub id: String,
@@ -24,11 +24,18 @@ pub struct SubTransaction {
     pub memo: Option<String>,
     #[serde(rename = "payee_id", skip_serializing_if = "Option::is_none")]
     pub payee_id: Option<String>,
+    #[serde(rename = "payee_name", skip_serializing_if = "Option::is_none")]
+    pub payee_name: Option<String>,
     #[serde(rename = "category_id", skip_serializing_if = "Option::is_none")]
     pub category_id: Option<String>,
+    #[serde(rename = "category_name", skip_serializing_if = "Option::is_none")]
+    pub category_name: Option<String>,
     /// If a transfer, the account_id which the subtransaction transfers to
     #[serde(rename = "transfer_account_id", skip_serializing_if = "Option::is_none")]
     pub transfer_account_id: Option<String>,
+    /// If a transfer, the id of transaction on the other side of the transfer
+    #[serde(rename = "transfer_transaction_id", skip_serializing_if = "Option::is_none")]
+    pub transfer_transaction_id: Option<String>,
     /// Whether or not the subtransaction has been deleted.  Deleted subtransactions will only be included in delta requests.
     #[serde(rename = "deleted")]
     pub deleted: bool,
@@ -42,8 +49,11 @@ impl SubTransaction {
             amount,
             memo: None,
             payee_id: None,
+            payee_name: None,
             category_id: None,
+            category_name: None,
             transfer_account_id: None,
+            transfer_transaction_id: None,
             deleted,
         }
     }

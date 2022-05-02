@@ -11,16 +11,16 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ErrorResponse {
     #[serde(rename = "error")]
-    pub error: crate::models::ErrorDetail,
+    pub error: Box<crate::models::ErrorDetail>,
 }
 
 impl ErrorResponse {
     pub fn new(error: crate::models::ErrorDetail) -> ErrorResponse {
         ErrorResponse {
-            error,
+            error: Box::new(error),
         }
     }
 }

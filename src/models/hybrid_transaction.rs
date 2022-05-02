@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct HybridTransaction {
     #[serde(rename = "id")]
     pub id: String,
@@ -95,7 +95,7 @@ impl HybridTransaction {
 }
 
 /// The cleared status of the transaction
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Cleared {
     #[serde(rename = "cleared")]
     Cleared,
@@ -104,8 +104,14 @@ pub enum Cleared {
     #[serde(rename = "reconciled")]
     Reconciled,
 }
+
+impl Default for Cleared {
+    fn default() -> Cleared {
+        Self::Cleared
+    }
+}
 /// The transaction flag
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum FlagColor {
     #[serde(rename = "red")]
     Red,
@@ -120,12 +126,24 @@ pub enum FlagColor {
     #[serde(rename = "purple")]
     Purple,
 }
+
+impl Default for FlagColor {
+    fn default() -> FlagColor {
+        Self::Red
+    }
+}
 /// Whether the hybrid transaction represents a regular transaction or a subtransaction
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Type {
     #[serde(rename = "transaction")]
     Transaction,
     #[serde(rename = "subtransaction")]
     Subtransaction,
+}
+
+impl Default for Type {
+    fn default() -> Type {
+        Self::Transaction
+    }
 }
 

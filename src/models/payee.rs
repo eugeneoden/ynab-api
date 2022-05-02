@@ -11,13 +11,13 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct Payee {
     #[serde(rename = "id")]
     pub id: String,
     #[serde(rename = "name")]
     pub name: String,
-    /// If a transfer payee, the account_id to which this payee transfers to
+    /// If a transfer payee, the `account_id` to which this payee transfers to
     #[serde(rename = "transfer_account_id", skip_serializing_if = "Option::is_none")]
     pub transfer_account_id: Option<String>,
     /// Whether or not the payee has been deleted.  Deleted payees will only be included in delta requests.

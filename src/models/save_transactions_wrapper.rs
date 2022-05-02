@@ -11,10 +11,10 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SaveTransactionsWrapper {
     #[serde(rename = "transaction", skip_serializing_if = "Option::is_none")]
-    pub transaction: Option<crate::models::SaveTransaction>,
+    pub transaction: Option<Box<crate::models::SaveTransaction>>,
     #[serde(rename = "transactions", skip_serializing_if = "Option::is_none")]
     pub transactions: Option<Vec<crate::models::SaveTransaction>>,
 }

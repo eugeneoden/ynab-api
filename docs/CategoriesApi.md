@@ -4,10 +4,10 @@ All URIs are relative to *https://api.youneedabudget.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_categories**](CategoriesApi.md#get_categories) | **get** /budgets/{budget_id}/categories | List categories
-[**get_category_by_id**](CategoriesApi.md#get_category_by_id) | **get** /budgets/{budget_id}/categories/{category_id} | Single category
-[**get_month_category_by_id**](CategoriesApi.md#get_month_category_by_id) | **get** /budgets/{budget_id}/months/{month}/categories/{category_id} | Single category for a specific budget month
-[**update_month_category**](CategoriesApi.md#update_month_category) | **patch** /budgets/{budget_id}/months/{month}/categories/{category_id} | Update a category for a specific month
+[**get_categories**](CategoriesApi.md#get_categories) | **GET** /budgets/{budget_id}/categories | List categories
+[**get_category_by_id**](CategoriesApi.md#get_category_by_id) | **GET** /budgets/{budget_id}/categories/{category_id} | Single category
+[**get_month_category_by_id**](CategoriesApi.md#get_month_category_by_id) | **GET** /budgets/{budget_id}/months/{month}/categories/{category_id} | Single category for a specific budget month
+[**update_month_category**](CategoriesApi.md#update_month_category) | **PATCH** /budgets/{budget_id}/months/{month}/categories/{category_id} | Update a category for a specific month
 
 
 
@@ -23,8 +23,8 @@ Returns all categories grouped by category group.  Amounts (budgeted, activity, 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**budget_id** | **String** | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget) | [required] |
-**last_knowledge_of_server** | Option<**i64**> | The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included. |  |
+**budget_id** | **String** | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | [required] |
+**last_knowledge_of_server** | Option<**i64**> | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. |  |
 
 ### Return type
 
@@ -54,7 +54,7 @@ Returns a single category.  Amounts (budgeted, activity, balance, etc.) are spec
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**budget_id** | **String** | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget) | [required] |
+**budget_id** | **String** | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | [required] |
 **category_id** | **String** | The id of the category | [required] |
 
 ### Return type
@@ -85,7 +85,7 @@ Returns a single category for a specific budget month.  Amounts (budgeted, activ
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**budget_id** | **String** | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget) | [required] |
+**budget_id** | **String** | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | [required] |
 **month** | **String** | The budget month in ISO format (e.g. 2016-12-01) (\"current\" can also be used to specify the current calendar month (UTC)) | [required] |
 **category_id** | **String** | The id of the category | [required] |
 
@@ -110,17 +110,17 @@ Name | Type | Description  | Required | Notes
 > crate::models::SaveCategoryResponse update_month_category(budget_id, month, category_id, data)
 Update a category for a specific month
 
-Update a category for a specific month
+Update a category for a specific month.  Only `budgeted` amount can be updated.
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**budget_id** | **String** | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget) | [required] |
+**budget_id** | **String** | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | [required] |
 **month** | **String** | The budget month in ISO format (e.g. 2016-12-01) (\"current\" can also be used to specify the current calendar month (UTC)) | [required] |
 **category_id** | **String** | The id of the category | [required] |
-**data** | [**SaveMonthCategoryWrapper**](SaveMonthCategoryWrapper.md) | The category to update | [required] |
+**data** | [**SaveMonthCategoryWrapper**](SaveMonthCategoryWrapper.md) | The category to update.  Only `budgeted` amount can be updated and any other fields specified will be ignored. | [required] |
 
 ### Return type
 

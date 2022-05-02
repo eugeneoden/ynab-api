@@ -11,12 +11,12 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct BudgetSummaryResponseData {
     #[serde(rename = "budgets")]
     pub budgets: Vec<crate::models::BudgetSummary>,
     #[serde(rename = "default_budget", skip_serializing_if = "Option::is_none")]
-    pub default_budget: Option<crate::models::BudgetSummary>,
+    pub default_budget: Option<Box<crate::models::BudgetSummary>>,
 }
 
 impl BudgetSummaryResponseData {

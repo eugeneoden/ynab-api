@@ -12,7 +12,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct DateFormat {
     #[serde(rename = "format")]
     pub format: String,

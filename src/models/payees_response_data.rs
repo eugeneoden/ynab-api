@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct PayeesResponseData {
     #[serde(rename = "payees")]
     pub payees: Vec<crate::models::Payee>,

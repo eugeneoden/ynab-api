@@ -11,17 +11,17 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SaveTransactionsResponseData {
     /// The transaction ids that were saved
     #[serde(rename = "transaction_ids")]
     pub transaction_ids: Vec<String>,
     #[serde(rename = "transaction", skip_serializing_if = "Option::is_none")]
-    pub transaction: Option<crate::models::TransactionDetail>,
+    pub transaction: Option<Box<crate::models::TransactionDetail>>,
     /// If multiple transactions were specified, the transactions that were saved
     #[serde(rename = "transactions", skip_serializing_if = "Option::is_none")]
     pub transactions: Option<Vec<crate::models::TransactionDetail>>,
-    /// If multiple transactions were specified, a list of import_ids that were not created because of an existing import_id found on the same account
+    /// If multiple transactions were specified, a list of import_ids that were not created because of an existing `import_id` found on the same account
     #[serde(rename = "duplicate_import_ids", skip_serializing_if = "Option::is_none")]
     pub duplicate_import_ids: Option<Vec<String>>,
     /// The knowledge of the server

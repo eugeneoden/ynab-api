@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ScheduledTransactionDetailAllOf {
     #[serde(rename = "account_name")]
     pub account_name: String,

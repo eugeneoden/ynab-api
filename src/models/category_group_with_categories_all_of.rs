@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct CategoryGroupWithCategoriesAllOf {
     /// Category group categories.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).
     #[serde(rename = "categories")]

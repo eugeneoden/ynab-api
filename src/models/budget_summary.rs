@@ -11,7 +11,7 @@
 
 
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct BudgetSummary {
     #[serde(rename = "id")]
     pub id: String,
@@ -27,9 +27,12 @@ pub struct BudgetSummary {
     #[serde(rename = "last_month", skip_serializing_if = "Option::is_none")]
     pub last_month: Option<String>,
     #[serde(rename = "date_format", skip_serializing_if = "Option::is_none")]
-    pub date_format: Option<crate::models::DateFormat>,
+    pub date_format: Option<Box<crate::models::DateFormat>>,
     #[serde(rename = "currency_format", skip_serializing_if = "Option::is_none")]
-    pub currency_format: Option<crate::models::CurrencyFormat>,
+    pub currency_format: Option<Box<crate::models::CurrencyFormat>>,
+    /// The budget accounts (only included if `include_accounts=true` specified as query parameter)
+    #[serde(rename = "accounts", skip_serializing_if = "Option::is_none")]
+    pub accounts: Option<Vec<crate::models::Account>>,
 }
 
 impl BudgetSummary {
@@ -42,6 +45,7 @@ impl BudgetSummary {
             last_month: None,
             date_format: None,
             currency_format: None,
+            accounts: None,
         }
     }
 }
