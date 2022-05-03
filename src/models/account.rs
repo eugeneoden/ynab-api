@@ -84,8 +84,12 @@ pub enum Type {
     CreditCard,
     #[serde(rename = "lineOfCredit")]
     LineOfCredit,
+    #[serde(rename = "autoLoan")]
+    AutoLoan,
     #[serde(rename = "otherAsset")]
     OtherAsset,
+    #[serde(rename = "otherDebt")]
+    OtherDebt,
     #[serde(rename = "otherLiability")]
     OtherLiability,
     #[serde(rename = "payPal")]
