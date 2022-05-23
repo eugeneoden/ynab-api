@@ -105,6 +105,8 @@ pub enum GoalType {
     MF,
     #[serde(rename = "NEED")]
     NEED,
+    #[serde(rename = "DEBT")]
+    DEBT,
 }
 
 impl Default for GoalType {
