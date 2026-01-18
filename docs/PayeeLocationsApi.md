@@ -1,6 +1,6 @@
 # \PayeeLocationsApi
 
-All URIs are relative to *https://api.youneedabudget.com/v1*
+All URIs are relative to *https://api.ynab.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## get_payee_location_by_id
 
-> crate::models::PayeeLocationResponse get_payee_location_by_id(budget_id, payee_location_id)
+> models::PayeeLocationResponse get_payee_location_by_id(budget_id, payee_location_id)
 Single payee location
 
 Returns a single payee location
@@ -22,12 +22,12 @@ Returns a single payee location
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**budget_id** | **String** | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | [required] |
+**budget_id** | **String** | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | [required] |
 **payee_location_id** | **String** | id of payee location | [required] |
 
 ### Return type
 
-[**crate::models::PayeeLocationResponse**](PayeeLocationResponse.md)
+[**models::PayeeLocationResponse**](PayeeLocationResponse.md)
 
 ### Authorization
 
@@ -43,7 +43,7 @@ Name | Type | Description  | Required | Notes
 
 ## get_payee_locations
 
-> crate::models::PayeeLocationsResponse get_payee_locations(budget_id)
+> models::PayeeLocationsResponse get_payee_locations(budget_id)
 List payee locations
 
 Returns all payee locations
@@ -53,11 +53,11 @@ Returns all payee locations
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**budget_id** | **String** | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | [required] |
+**budget_id** | **String** | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | [required] |
 
 ### Return type
 
-[**crate::models::PayeeLocationsResponse**](PayeeLocationsResponse.md)
+[**models::PayeeLocationsResponse**](PayeeLocationsResponse.md)
 
 ### Authorization
 
@@ -73,7 +73,7 @@ Name | Type | Description  | Required | Notes
 
 ## get_payee_locations_by_payee
 
-> crate::models::PayeeLocationsResponse get_payee_locations_by_payee(budget_id, payee_id)
+> models::PayeeLocationsResponse get_payee_locations_by_payee(budget_id, payee_id)
 List locations for a payee
 
 Returns all payee locations for a specified payee
@@ -83,12 +83,12 @@ Returns all payee locations for a specified payee
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**budget_id** | **String** | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget). | [required] |
+**budget_id** | **String** | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | [required] |
 **payee_id** | **String** | id of payee | [required] |
 
 ### Return type
 
-[**crate::models::PayeeLocationsResponse**](PayeeLocationsResponse.md)
+[**models::PayeeLocationsResponse**](PayeeLocationsResponse.md)
 
 ### Authorization
 
